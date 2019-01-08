@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="bd_SegurosFalabellaModelStoreContainer" CdmEntityContainer="bd_SegurosFalabellaEntities">
+    <EntitySetMapping Name="tbl_Aseguradoras">
+      <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Aseguradoras">
+        <MappingFragment StoreEntitySet="tbl_Aseguradoras">
+          <ScalarProperty Name="aseg_IdAseguradoraPk" ColumnName="aseg_IdAseguradoraPk" />
+          <ScalarProperty Name="aseg_NombreAseguradora" ColumnName="aseg_NombreAseguradora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Clientes">
+      <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Clientes">
+        <MappingFragment StoreEntitySet="tbl_Clientes">
+          <ScalarProperty Name="clie_IdClientePk" ColumnName="clie_IdClientePk" />
+          <ScalarProperty Name="clie_Descripcion" ColumnName="clie_Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Productos">
+      <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Productos">
+        <MappingFragment StoreEntitySet="tbl_Productos">
+          <ScalarProperty Name="prod_IdProductoPk" ColumnName="prod_IdProductoPk" />
+          <ScalarProperty Name="prod_Descripcion" ColumnName="prod_Descripcion" />
+          <ScalarProperty Name="prod_Prima" ColumnName="prod_Prima" />
+          <ScalarProperty Name="prod_Cobertura" ColumnName="prod_Cobertura" />
+          <ScalarProperty Name="prod_Asistencia" ColumnName="prod_Asistencia" />
+          <ScalarProperty Name="prod_MontoVenta" ColumnName="prod_MontoVenta" />
+          <ScalarProperty Name="prod_IdAseguradora_Fk" ColumnName="prod_IdAseguradora_Fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Ventas">
+      <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Ventas">
+        <MappingFragment StoreEntitySet="tbl_Ventas">
+          <ScalarProperty Name="vent_IdVentasPk" ColumnName="vent_IdVentasPk" />
+          <ScalarProperty Name="vent_FechaVenta" ColumnName="vent_FechaVenta" />
+          <ScalarProperty Name="vent_IdClienteFk" ColumnName="vent_IdClienteFk" />
+          <ScalarProperty Name="vent_IdProductoFk" ColumnName="vent_IdProductoFk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
