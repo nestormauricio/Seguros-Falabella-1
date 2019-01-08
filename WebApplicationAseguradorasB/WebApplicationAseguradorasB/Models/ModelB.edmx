@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bd_SegurosFalabellaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Aseguradoras">
+          <Key>
+            <PropertyRef Name="aseg_IdAseguradoraPk" />
+          </Key>
+          <Property Name="aseg_IdAseguradoraPk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aseg_NombreAseguradora" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Clientes">
+          <Key>
+            <PropertyRef Name="clie_IdClientePk" />
+          </Key>
+          <Property Name="clie_IdClientePk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clie_Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Productos">
+          <Key>
+            <PropertyRef Name="prod_IdProductoPk" />
+          </Key>
+          <Property Name="prod_IdProductoPk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="prod_Descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="prod_Prima" Type="nvarchar(max)" />
+          <Property Name="prod_Cobertura" Type="nvarchar(max)" />
+          <Property Name="prod_Asistencia" Type="nvarchar(max)" />
+          <Property Name="prod_MontoVenta" Type="int" />
+          <Property Name="prod_IdAseguradora_Fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Ventas">
+          <Key>
+            <PropertyRef Name="vent_IdVentasPk" />
+          </Key>
+          <Property Name="vent_IdVentasPk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vent_FechaVenta" Type="date" Nullable="false" />
+          <Property Name="vent_IdClienteFk" Type="int" Nullable="false" />
+          <Property Name="vent_IdProductoFk" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Productos_tbl_Aseguradoras">
+          <End Role="tbl_Aseguradoras" Type="Self.tbl_Aseguradoras" Multiplicity="1" />
+          <End Role="tbl_Productos" Type="Self.tbl_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Aseguradoras">
+              <PropertyRef Name="aseg_IdAseguradoraPk" />
+            </Principal>
+            <Dependent Role="tbl_Productos">
+              <PropertyRef Name="prod_IdAseguradora_Fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ventas_tbl_Clientes">
+          <End Role="tbl_Clientes" Type="Self.tbl_Clientes" Multiplicity="1" />
+          <End Role="tbl_Ventas" Type="Self.tbl_Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Clientes">
+              <PropertyRef Name="clie_IdClientePk" />
+            </Principal>
+            <Dependent Role="tbl_Ventas">
+              <PropertyRef Name="vent_IdClienteFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ventas_tbl_Productos">
+          <End Role="tbl_Productos" Type="Self.tbl_Productos" Multiplicity="1" />
+          <End Role="tbl_Ventas" Type="Self.tbl_Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Productos">
+              <PropertyRef Name="prod_IdProductoPk" />
+            </Principal>
+            <Dependent Role="tbl_Ventas">
+              <PropertyRef Name="vent_IdProductoFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_SegurosFalabellaModelStoreContainer">
+          <EntitySet Name="tbl_Aseguradoras" EntityType="Self.tbl_Aseguradoras" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Clientes" EntityType="Self.tbl_Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Productos" EntityType="Self.tbl_Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ventas" EntityType="Self.tbl_Ventas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Productos_tbl_Aseguradoras" Association="Self.FK_tbl_Productos_tbl_Aseguradoras">
+            <End Role="tbl_Aseguradoras" EntitySet="tbl_Aseguradoras" />
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ventas_tbl_Clientes" Association="Self.FK_tbl_Ventas_tbl_Clientes">
+            <End Role="tbl_Clientes" EntitySet="tbl_Clientes" />
+            <End Role="tbl_Ventas" EntitySet="tbl_Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ventas_tbl_Productos" Association="Self.FK_tbl_Ventas_tbl_Productos">
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+            <End Role="tbl_Ventas" EntitySet="tbl_Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_SegurosFalabellaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Aseguradoras">
+          <Key>
+            <PropertyRef Name="aseg_IdAseguradoraPk" />
+          </Key>
+          <Property Name="aseg_IdAseguradoraPk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aseg_NombreAseguradora" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Productos" Relationship="Self.FK_tbl_Productos_tbl_Aseguradoras" FromRole="tbl_Aseguradoras" ToRole="tbl_Productos" />
+        </EntityType>
+        <EntityType Name="tbl_Clientes">
+          <Key>
+            <PropertyRef Name="clie_IdClientePk" />
+          </Key>
+          <Property Name="clie_IdClientePk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clie_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Ventas" Relationship="Self.FK_tbl_Ventas_tbl_Clientes" FromRole="tbl_Clientes" ToRole="tbl_Ventas" />
+        </EntityType>
+        <EntityType Name="tbl_Productos">
+          <Key>
+            <PropertyRef Name="prod_IdProductoPk" />
+          </Key>
+          <Property Name="prod_IdProductoPk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="prod_Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prod_Prima" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="prod_Cobertura" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="prod_Asistencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="prod_MontoVenta" Type="Int32" />
+          <Property Name="prod_IdAseguradora_Fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Aseguradoras" Relationship="Self.FK_tbl_Productos_tbl_Aseguradoras" FromRole="tbl_Productos" ToRole="tbl_Aseguradoras" />
+          <NavigationProperty Name="tbl_Ventas" Relationship="Self.FK_tbl_Ventas_tbl_Productos" FromRole="tbl_Productos" ToRole="tbl_Ventas" />
+        </EntityType>
+        <EntityType Name="tbl_Ventas">
+          <Key>
+            <PropertyRef Name="vent_IdVentasPk" />
+          </Key>
+          <Property Name="vent_IdVentasPk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vent_FechaVenta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="vent_IdClienteFk" Type="Int32" Nullable="false" />
+          <Property Name="vent_IdProductoFk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Clientes" Relationship="Self.FK_tbl_Ventas_tbl_Clientes" FromRole="tbl_Ventas" ToRole="tbl_Clientes" />
+          <NavigationProperty Name="tbl_Productos" Relationship="Self.FK_tbl_Ventas_tbl_Productos" FromRole="tbl_Ventas" ToRole="tbl_Productos" />
+        </EntityType>
+        <Association Name="FK_tbl_Productos_tbl_Aseguradoras">
+          <End Role="tbl_Aseguradoras" Type="Self.tbl_Aseguradoras" Multiplicity="1" />
+          <End Role="tbl_Productos" Type="Self.tbl_Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Aseguradoras">
+              <PropertyRef Name="aseg_IdAseguradoraPk" />
+            </Principal>
+            <Dependent Role="tbl_Productos">
+              <PropertyRef Name="prod_IdAseguradora_Fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ventas_tbl_Clientes">
+          <End Role="tbl_Clientes" Type="Self.tbl_Clientes" Multiplicity="1" />
+          <End Role="tbl_Ventas" Type="Self.tbl_Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Clientes">
+              <PropertyRef Name="clie_IdClientePk" />
+            </Principal>
+            <Dependent Role="tbl_Ventas">
+              <PropertyRef Name="vent_IdClienteFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ventas_tbl_Productos">
+          <End Role="tbl_Productos" Type="Self.tbl_Productos" Multiplicity="1" />
+          <End Role="tbl_Ventas" Type="Self.tbl_Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Productos">
+              <PropertyRef Name="prod_IdProductoPk" />
+            </Principal>
+            <Dependent Role="tbl_Ventas">
+              <PropertyRef Name="vent_IdProductoFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_SegurosFalabellaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Aseguradoras" EntityType="Self.tbl_Aseguradoras" />
+          <EntitySet Name="tbl_Clientes" EntityType="Self.tbl_Clientes" />
+          <EntitySet Name="tbl_Productos" EntityType="Self.tbl_Productos" />
+          <EntitySet Name="tbl_Ventas" EntityType="Self.tbl_Ventas" />
+          <AssociationSet Name="FK_tbl_Productos_tbl_Aseguradoras" Association="Self.FK_tbl_Productos_tbl_Aseguradoras">
+            <End Role="tbl_Aseguradoras" EntitySet="tbl_Aseguradoras" />
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ventas_tbl_Clientes" Association="Self.FK_tbl_Ventas_tbl_Clientes">
+            <End Role="tbl_Clientes" EntitySet="tbl_Clientes" />
+            <End Role="tbl_Ventas" EntitySet="tbl_Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ventas_tbl_Productos" Association="Self.FK_tbl_Ventas_tbl_Productos">
+            <End Role="tbl_Productos" EntitySet="tbl_Productos" />
+            <End Role="tbl_Ventas" EntitySet="tbl_Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_SegurosFalabellaModelStoreContainer" CdmEntityContainer="bd_SegurosFalabellaEntities">
+          <EntitySetMapping Name="tbl_Aseguradoras">
+            <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Aseguradoras">
+              <MappingFragment StoreEntitySet="tbl_Aseguradoras">
+                <ScalarProperty Name="aseg_IdAseguradoraPk" ColumnName="aseg_IdAseguradoraPk" />
+                <ScalarProperty Name="aseg_NombreAseguradora" ColumnName="aseg_NombreAseguradora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Clientes">
+            <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Clientes">
+              <MappingFragment StoreEntitySet="tbl_Clientes">
+                <ScalarProperty Name="clie_IdClientePk" ColumnName="clie_IdClientePk" />
+                <ScalarProperty Name="clie_Descripcion" ColumnName="clie_Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Productos">
+            <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Productos">
+              <MappingFragment StoreEntitySet="tbl_Productos">
+                <ScalarProperty Name="prod_IdProductoPk" ColumnName="prod_IdProductoPk" />
+                <ScalarProperty Name="prod_Descripcion" ColumnName="prod_Descripcion" />
+                <ScalarProperty Name="prod_Prima" ColumnName="prod_Prima" />
+                <ScalarProperty Name="prod_Cobertura" ColumnName="prod_Cobertura" />
+                <ScalarProperty Name="prod_Asistencia" ColumnName="prod_Asistencia" />
+                <ScalarProperty Name="prod_MontoVenta" ColumnName="prod_MontoVenta" />
+                <ScalarProperty Name="prod_IdAseguradora_Fk" ColumnName="prod_IdAseguradora_Fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ventas">
+            <EntityTypeMapping TypeName="bd_SegurosFalabellaModel.tbl_Ventas">
+              <MappingFragment StoreEntitySet="tbl_Ventas">
+                <ScalarProperty Name="vent_IdVentasPk" ColumnName="vent_IdVentasPk" />
+                <ScalarProperty Name="vent_FechaVenta" ColumnName="vent_FechaVenta" />
+                <ScalarProperty Name="vent_IdClienteFk" ColumnName="vent_IdClienteFk" />
+                <ScalarProperty Name="vent_IdProductoFk" ColumnName="vent_IdProductoFk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

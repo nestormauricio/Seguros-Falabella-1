@@ -1,0 +1,79 @@
+﻿@model WebApplicationAseguradorasB.Models.tbl_Productos
+
+@{
+    //ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
+}
+
+@*<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>*@
+<h2>Eliminar</h2>
+
+    <h3>¿Seguro de eliminarlo?</h3>
+<div>
+    @*<h4>tbl_Productos</h4>*@
+    <h4>Productos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.prod_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prod_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prod_Prima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prod_Prima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prod_Cobertura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prod_Cobertura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prod_Asistencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prod_Asistencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prod_MontoVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prod_MontoVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Aseguradoras.aseg_NombreAseguradora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Aseguradoras.aseg_NombreAseguradora)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @*<input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")*@
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    }
+</div>

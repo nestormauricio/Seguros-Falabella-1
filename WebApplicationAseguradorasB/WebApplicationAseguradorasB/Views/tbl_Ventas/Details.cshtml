@@ -1,0 +1,47 @@
+﻿@model WebApplicationAseguradorasB.Models.tbl_Ventas
+
+@{
+    //ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
+}
+
+@*<h2>Details</h2>*@
+<h2>Detalles</h2>
+
+<div>
+    @*<h4>tbl_Ventas</h4>*@
+    <h4>Ventas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.vent_FechaVenta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vent_FechaVenta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Clientes.clie_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Clientes.clie_Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_Productos.prod_Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_Productos.prod_Descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.vent_IdVentasPk }) |
+    @Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Editar", "Edit", new { id = Model.vent_IdVentasPk }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

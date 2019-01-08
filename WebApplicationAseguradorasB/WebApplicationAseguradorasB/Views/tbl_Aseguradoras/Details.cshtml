@@ -1,0 +1,31 @@
+﻿@model WebApplicationAseguradorasB.Models.tbl_Aseguradoras
+
+@{
+    //ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
+}
+
+@*<h2>Details</h2>*@
+<h2>Detalles</h2>
+
+<div>
+    @*<h4>tbl_Aseguradoras</h4>*@
+    <h4>Aseguradoras</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.aseg_NombreAseguradora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aseg_NombreAseguradora)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.aseg_IdAseguradoraPk }) |
+    @Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Editar", "Edit", new { id = Model.aseg_IdAseguradoraPk }) |
+    @Html.ActionLink("Volver", "Index")
+</p>
